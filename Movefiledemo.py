@@ -25,6 +25,7 @@ for fname in files:
     if last_mod_time(src_fname) > before:
         dst_fname = os.path.join('C:/Users/owner/Desktop/FolderB/', fname)
         shutil.move(src_fname, dst_fname)
+        
 
 if __name__=="__main__":
     pass
