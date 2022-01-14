@@ -33,35 +33,27 @@ def center_window(self, w, h): # pass in the tkinter frame (master) reference an
     return centerGeo
 
 
-# catch if the user's clicks on the windows upper-right 'X' to ensure they want to close
-SECONDS_IN_DAY = 24 * 60 * 60
-
-#set where the source of the files are
 
 
-#set the destination path to folderB
-
-
-
-now = time.time()
-before = now - SECONDS_IN_DAY
-source ='C:/Python_projects//'
-destination = 'C:/Python_projects//'
-files=os.listdir('C:/Python_projects//')
-
-
-def load_gui():
+def load_gui(self):
     center_window()
 
-def get_source(self):  #no need to pass arguments to functions in both cases
-    folder = fd.askdirectory(initialdir=os.path.normpath("C:/Python_projects/"), title="Select the Source Folder")
-    src_files= os.path.getmtime(folder)
-    return(folder)
+SECONDS_IN_DAY = 24 * 60 * 60
+now = time.time()
+before = now - SECONDS_IN_DAY
+
+
+
+def get_source(self):
+    src_folder = tk.StringVar()
+    src_folder = fd.askdirectory(initialdir=os.path.normpath("C:/Python_projects/"))
+    print (src_folder)
+       
     
-    
-def get_destination(self):  #no need to pass arguments to functions in both cases
-    folder2 = fd.askdirectory(initialdir=os.path.normpath("C:/Python_projects/"), title="Select the Destination Folder")
-    return(folder2)
+def get_destination(self):
+    src_destination = tk.StringVar()
+    src_destination = fd.askdirectory(initialdir=os.path.normpath("C:/Python_projects/"))
+    print (src_destination) 
     
 
 def last_mod_time(self):
@@ -72,13 +64,14 @@ def last_mod_time(self):
         dst_files= os.path.getmtime(folder2)
         compare_var= src_files > dst_files
         print(compare_var)
-        '''if src_files > dst_files:
+        if src_files > dst_files:
                 shutil.move(src_files, dst_files)
                 print("Move Successful")
         else:
             if src_files not in dst_files:
-                shutil.move()'''
-                             
+                shutil.move()
+                
+# catch if the user's clicks on the windows upper-right 'X' to ensure they want to close                             
 def ask_quit(self):
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
         # This closes app
