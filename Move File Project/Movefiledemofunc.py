@@ -99,6 +99,9 @@ def move_file_func(self):
     global dst_mod_files
     if src_mod_files != dst_mod_files:
         shutil.move(src_path,dst_path)
+        
+    
+        
 
         #i am able to move the files now that are not in the other file.
         #I need to figure out how to compare mtime at the end of the string in the global variable
