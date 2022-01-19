@@ -19,6 +19,8 @@ from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox
 from pathlib import Path
+import glob
+
 import Movefiledemomain
 import Movefiledemogui
 
@@ -42,35 +44,42 @@ SECONDS_IN_DAY = 24 * 60 * 60
 now = time.time()
 before = now - SECONDS_IN_DAY
 
-
+src_files = str(0)
+dst_files = str(0)
+src_list =  str(0)
+dst_list =  str(0)
 
 def get_source(self):
-    src_folder = tk.StringVar()
-    src_folder = fd.askdirectory(initialdir=os.path.normpath("C:/Python_projects/"))
-    print (src_folder)
-       
-    
-def get_destination(self):
-    src_destination = tk.StringVar()
-    src_destination = fd.askdirectory(initialdir=os.path.normpath("C:/Python_projects/"))
-    print (src_destination) 
+    global src_files
+    global src_list
+    src_path = fd.askdirectory()
+    self.src_folder.insert(0,src_path)
+    src_list=os.listdir(src_path)
+    for i in src_list:
+        src_fname=os.path.join(str(src_list),i)
+        print (i)
+# I am having a hard time getting the mtime from this output.
     
 
-def last_mod_time(self):
-    for folder in files:
-    #we are saying move the files represented by 'i' to their new destination
-        src_files= os.path.getmtime(folder)
-    for folder2 in files:
-        dst_files= os.path.getmtime(folder2)
-        compare_var= src_files > dst_files
-        print(compare_var)
-        if src_files > dst_files:
-                shutil.move(src_files, dst_files)
-                print("Move Successful")
-        else:
-            if src_files not in dst_files:
-                shutil.move()
-                
+
+def get_destination(self):
+    global dst_files
+    global dst_list
+    dst_path = fd.askdirectory()
+    self.dst_folder.insert(0,dst_path)
+    dst_list=os.listdir(dst_path)
+    for i in dst_files:
+        dst_fname=os.path.join(str(dst_files),i)
+        print (i)
+# I am having a hard time getting the mtime from this output.
+         
+# I know the third compare functionhas to go here. But i need help
+#def compare_files_move(fname):
+    
+
+
+
+                    
 # catch if the user's clicks on the windows upper-right 'X' to ensure they want to close                             
 def ask_quit(self):
     if messagebox.askokcancel("Exit program", "Okay to exit application?"):
