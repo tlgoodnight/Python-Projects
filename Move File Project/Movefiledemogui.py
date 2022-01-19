@@ -33,7 +33,7 @@ def load_gui(self):
     self.dst_button.grid(row=4, column=1)
     self.dst_folder = ttk.Entry(self.master)
     self.dst_folder.grid(row=4,column=2,rowspan=1,columnspan=2,padx=(10),pady=(10,0))
-    self.compare_button = tk.Button(self.master,text='Click here to initiate file transfer',command=lambda: Movefiledemofunc.listToStringSrc(self))
+    self.compare_button = tk.Button(self.master,text='Click here to initiate file transfer',command=lambda: Movefiledemofunc.move_file_func(self))
     self.compare_button.grid(row=6, column=1)
     self.src_fname = ttk.Entry(self.master)
     self.src_fname.grid(row=6,column=2,rowspan=1,columnspan=2,padx=(10),pady=(10,0))
