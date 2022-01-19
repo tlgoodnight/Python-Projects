@@ -44,51 +44,65 @@ SECONDS_IN_DAY = 24 * 60 * 60
 now = time.time()
 before = now - SECONDS_IN_DAY
 
-global mod_time_src 
-global mod_time_dst 
-
+global src_mod_files
+global dst_mod_files
+global src_path
+global dst_path
 
 def get_source(self):
-    global mod_time_src
+    global src_mod_files
+    global src_path
     src_path = fd.askdirectory()
     self.src_folder.insert(0,src_path)
     src_list=os.listdir(src_path)
     for i in src_list:
         src_fname=os.path.join(str(src_list),i)
         mod_time_src = time.strftime('%y-%m-%d %H:%M:%S',time.localtime(last_mod_time(i)))
-        print (i + mod_time_src)
+        src_mod_files = (i + "." + mod_time_src)
+        print (src_mod_files)
        
-        #this works now returning the mtime. But I get erros depending on the files in the directory
-        # here is the error ile "C:\Python310\lib\genericpath.py", line 55, in getmtime
-   # return os.stat(filename).st_mtime
-#FileNotFoundError: [WinError 2] The system cannot find the file specified: '.git'
-   #going to research error exceptions
-
-
+        #this works now returning the mtime. and it prints the file not present in Idle.
+      
     
 
 
 def get_destination(self):
-    global mod_time_dst
+    global dst_mod_files
+    global dst_path
     dst_path = fd.askdirectory()
     self.dst_folder.insert(0,dst_path)
     dst_list=os.listdir(dst_path)
     for i in dst_list:
         dst_fname=os.path.join(str(dst_list),i)
         mod_time_dst= time.strftime('%y-%m-%d %H:%M:%S',time.localtime(last_mod_time(i)))
-        print (i + mod_time_dst)
+        dst_mod_files = (i + "." + mod_time_dst)
+        print (dst_mod_files)
     
     
          
 
 def last_mod_time(i):
-    return os.path.getmtime(i)
+    try:
+        return os.path.getmtime(i)
+    except FileNotFoundError:
+        print (i)
+       
+       
+        
 
 
 #I know the third compare function has to go here. But i need help
-#def move_file_func(self):
-    #global mod_time_src
-    #global mod_time_dst'''
+def move_file_func(self):
+    global src_path
+    global dst_path
+    global src_mod_files
+    global dst_mod_files
+    if src_mod_files != dst_mod_files:
+        shutil.move(src_path,dst_path)
+
+        #i am able to move the files now that are not in the other file.
+        #I need to figure out how to compare mtime at the end of the string in the global variable
+        
     
     
                     
