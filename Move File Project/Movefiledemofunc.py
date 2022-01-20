@@ -58,22 +58,20 @@ def get_source(self):
     self.src_folder.insert(0,src_path)
     src_list=os.listdir(src_path)
     for i in src_list:
-        src_fname = i
-        print(src_fname)
+        src_fname = str(i)
         # Code to here prints the file names in order (they are string value) This WORKS
         def last_mod_time(i):
             try:
                 return os.path.getmtime(i)    
             except FileNotFoundError:
                 print 
-    for i in src_list:
         mod_time_src = time.ctime(last_mod_time(i))# returns files with string time
         print(src_fname,mod_time_src)#just print to idle to ensure it is capturing correct data'''
-        # here src_fname has changed to just the last file in the folder 
+        #This finally works 
 
         
 
-# on hold on this until the above works then will copy format here
+
 def get_destination(self):
     global mod_time_dst
     global dst_fname
@@ -81,15 +79,14 @@ def get_destination(self):
     self.dst_folder.insert(0,dst_path) # path
     dst_list=os.listdir(dst_path) #returns list of filenames
     for i in dst_list:
-        dst_fname = (i) # returns string value of file name
-    '''def last_mod_time(i):
-        try:
-            return os.path.getmtime(i)    
-        except FileNotFoundError:
-            print 
-    for i in dst_list:
+        dst_fname = str(i) # returns string value of file name
+        def last_mod_time(i):
+            try:
+                return os.path.getmtime(i)    
+            except FileNotFoundError:
+                print 
         mod_time_dst= time.ctime(last_mod_time(i))# returns string of mtime of file
-        print (dst_fname) #just print to idle to ensure it is capturing correct data.'''
+        print (dst_fname,mod_time_dst) #just print to idle to ensure it is capturing correct data.'''
         
 
 
