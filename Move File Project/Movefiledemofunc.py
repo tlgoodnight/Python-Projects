@@ -43,7 +43,7 @@ def load_gui(self):
 
 global mod_time_src
 global mod_time_dst
-global src_fname
+global src_list
 global dst_list
 
 
@@ -52,8 +52,7 @@ global dst_list
              
 
 def get_source(self):
-    global mod_time_src
-    global src_fname
+    global src_list
     src_path = fd.askdirectory()
     self.src_folder.insert(0,src_path)
     src_list=os.listdir(src_path)
@@ -67,14 +66,14 @@ def get_source(self):
                 print 
         mod_time_src = time.ctime(last_mod_time(i))# returns files with string time
         print(src_fname,mod_time_src)#just print to idle to ensure it is capturing correct data'''
-        #This finally works 
+        #This finally works
 
         
 
 
 def get_destination(self):
     global mod_time_dst
-    global dst_fname
+    global dst_list
     dst_path = fd.askdirectory()
     self.dst_folder.insert(0,dst_path) # path
     dst_list=os.listdir(dst_path) #returns list of filenames
@@ -92,19 +91,20 @@ def get_destination(self):
 
 #I know the third compare function has to go here. But i need help
 def move_file_func(self):
-    global mod_time_src
-    global mod_time_dst
-    global src_fname
-    global dst_fname         
-    for i in src_fname:
-        for i in dst_fname:
-            src_fname != dst_fname  
-            print(i, "The file is not in dst would be moved")
+    day = 24*60*60
+    current_time = time.time()
+    time_v = current_time - day
+    source = self.src_folder.get()
+    destination = self.dst_folder.get()
+    for file in os.listdir(source):
+        src_files = os.path.join(source,file)
+        src_mod_time = os.path.getmtime(src_files)
+        if src_mod_time > time_v:
+            dst_files = os.path.join(destination,file)
+            shutil.move(src_files,dst_files)
+            print(f"{file}has been moved")
+        
                 
-        #if src_fname  == dst_fname:
-        #print("file is same than dst should not be moved next logic")
-   # This returns a comparison but i am not convinced it is returning the  what i want. I don't want to spin my wheels here any more.
-   #need assistance
     
         
 
