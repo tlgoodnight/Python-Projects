@@ -43,7 +43,7 @@ def load_gui(self):
 
 global mod_time_src
 global mod_time_dst
-global src_list
+global src_fname
 global dst_list
 
 
@@ -53,44 +53,43 @@ global dst_list
 
 def get_source(self):
     global mod_time_src
-    global src_list
-    
+    global src_fname
     src_path = fd.askdirectory()
     self.src_folder.insert(0,src_path)
     src_list=os.listdir(src_path)
     for i in src_list:
         src_fname = i
+        print(src_fname)
         # Code to here prints the file names in order (they are string value) This WORKS
-    def last_mod_time(i):
-        try:
-            return os.path.getmtime(i)    
-        except FileNotFoundError:
-            print 
+        def last_mod_time(i):
+            try:
+                return os.path.getmtime(i)    
+            except FileNotFoundError:
+                print 
     for i in src_list:
         mod_time_src = time.ctime(last_mod_time(i))# returns files with string time
-        print(mod_time_src)#just print to idle to ensure it is capturing correct data
-        
+        print(src_fname,mod_time_src)#just print to idle to ensure it is capturing correct data'''
+        # here src_fname has changed to just the last file in the folder 
 
         
 
-
+# on hold on this until the above works then will copy format here
 def get_destination(self):
     global mod_time_dst
-    global dst_list
-    
+    global dst_fname
     dst_path = fd.askdirectory()
     self.dst_folder.insert(0,dst_path) # path
     dst_list=os.listdir(dst_path) #returns list of filenames
     for i in dst_list:
         dst_fname = (i) # returns string value of file name
-    def last_mod_time(i):
+    '''def last_mod_time(i):
         try:
             return os.path.getmtime(i)    
         except FileNotFoundError:
             print 
     for i in dst_list:
         mod_time_dst= time.ctime(last_mod_time(i))# returns string of mtime of file
-        print (mod_time_dst) #just print to idle to ensure it is capturing correct data.
+        print (dst_fname) #just print to idle to ensure it is capturing correct data.'''
         
 
 
@@ -98,12 +97,15 @@ def get_destination(self):
 def move_file_func(self):
     global mod_time_src
     global mod_time_dst
-    for i in mod_time_src:
-        for i in mod_time_dst:            
-            if mod_time_src > mod_time_dst:
-                print("file is newer than dst - should be moved")
-            if mod_time_src <= mod_time_dst:
-                print("file is newer than dst should not be moved")
+    global src_fname
+    global dst_fname         
+    for i in src_fname:
+        for i in dst_fname:
+            src_fname != dst_fname  
+            print(i, "The file is not in dst would be moved")
+                
+        #if src_fname  == dst_fname:
+        #print("file is same than dst should not be moved next logic")
    # This returns a comparison but i am not convinced it is returning the  what i want. I don't want to spin my wheels here any more.
    #need assistance
     
