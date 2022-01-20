@@ -12,7 +12,7 @@
 import shutil
 import os
 import time
-import datetime
+from datetime import datetime
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -40,73 +40,79 @@ def center_window(self, w, h): # pass in the tkinter frame (master) reference an
 def load_gui(self):
     center_window()
 
-SECONDS_IN_DAY = 24 * 60 * 60
-now = time.time()
-before = now - SECONDS_IN_DAY
 
-global src_mod_files
-global dst_mod_files
+global mod_time_src
+global mod_time_dst
+global src_list
+global dst_list
 global src_path
 global dst_path
 
+
+
+             
+
 def get_source(self):
-    global src_mod_files
+    global mod_time_src
+    global src_list
     global src_path
     src_path = fd.askdirectory()
     self.src_folder.insert(0,src_path)
     src_list=os.listdir(src_path)
     for i in src_list:
-        src_fname=os.path.join(str(src_list),i)
-        mod_time_src = time.strftime('%y-%m-%d %H:%M:%S',time.localtime(last_mod_time(i)))
-        src_mod_files = (i + "." + mod_time_src)
-        print (src_mod_files)
-       
-        #this works now returning the mtime. and it prints the file not present in Idle.
-      
-    
+        src_fname = i
+        # Code to here prints the file names in order (they are string value) This WORKS
+    def last_mod_time(i):
+        try:
+            return os.path.getmtime(i)    
+        except FileNotFoundError:
+            print 
+    for i in src_list:
+        mod_time_src = time.ctime(last_mod_time(i))# returns files with string time
+        print(mod_time_src)#just print to idle to ensure it is capturing correct data
+        
+
+        
 
 
 def get_destination(self):
-    global dst_mod_files
+    global mod_time_dst
+    global dst_list
     global dst_path
     dst_path = fd.askdirectory()
-    self.dst_folder.insert(0,dst_path)
-    dst_list=os.listdir(dst_path)
+    self.dst_folder.insert(0,dst_path) # path
+    dst_list=os.listdir(dst_path) #returns list of filenames
     for i in dst_list:
-        dst_fname=os.path.join(str(dst_list),i)
-        mod_time_dst= time.strftime('%y-%m-%d %H:%M:%S',time.localtime(last_mod_time(i)))
-        dst_mod_files = (i + "." + mod_time_dst)
-        print (dst_mod_files)
-    
-    
-         
-
-def last_mod_time(i):
-    try:
-        return os.path.getmtime(i)
-    except FileNotFoundError:
-        print (i)
-       
-       
+        dst_fname = (i) # returns string value of file name
+    def last_mod_time(i):
+        try:
+            return os.path.getmtime(i)    
+        except FileNotFoundError:
+            print 
+    for i in dst_list:
+        mod_time_dst= time.ctime(last_mod_time(i))# returns string of mtime of file
+        print (mod_time_dst) #just print to idle to ensure it is capturing correct data.
         
 
 
 #I know the third compare function has to go here. But i need help
 def move_file_func(self):
+    global mod_time_src
+    global mod_time_dst
     global src_path
     global dst_path
-    global src_mod_files
-    global dst_mod_files
-    if src_mod_files != dst_mod_files:
-        shutil.move(src_path,dst_path)
-        
+    for i in mod_time_src:
+        for i in mod_time_dst:            
+            if mod_time_src > mod_time_dst:
+                print("file is newer than dst - should be moved")
+            if mod_time_src <= mod_time_dst:
+                print("file is newer than dst should not be moved")
+   # This returns a comparison but i am not convinced it is returning the  what i want. I don't want to spin my wheels here any more.
+   #need assistance
     
         
 
-        #i am able to move the files now that are not in the other file.
-        #I need to figure out how to compare mtime at the end of the string in the global variable
-        
-    
+            
     
                     
 # catch if the user's clicks on the windows upper-right 'X' to ensure they want to close                             
