@@ -45,8 +45,7 @@ global mod_time_src
 global mod_time_dst
 global src_list
 global dst_list
-global src_path
-global dst_path
+
 
 
 
@@ -55,7 +54,7 @@ global dst_path
 def get_source(self):
     global mod_time_src
     global src_list
-    global src_path
+    
     src_path = fd.askdirectory()
     self.src_folder.insert(0,src_path)
     src_list=os.listdir(src_path)
@@ -78,7 +77,7 @@ def get_source(self):
 def get_destination(self):
     global mod_time_dst
     global dst_list
-    global dst_path
+    
     dst_path = fd.askdirectory()
     self.dst_folder.insert(0,dst_path) # path
     dst_list=os.listdir(dst_path) #returns list of filenames
@@ -99,8 +98,6 @@ def get_destination(self):
 def move_file_func(self):
     global mod_time_src
     global mod_time_dst
-    global src_path
-    global dst_path
     for i in mod_time_src:
         for i in mod_time_dst:            
             if mod_time_src > mod_time_dst:
