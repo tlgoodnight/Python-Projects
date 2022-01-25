@@ -4,21 +4,22 @@
 This repository is the location of my Python Projects for the Tech Academy. 
 
 <h3>Projects:</h3>
+<ul>
+ <li>Nice Or Mean game</li>
+ <li>Check Files GUI</li>
+ <li>Django_Checkbook</li>
+ </ul>
 
-Phonebook
-Check Files GUI
-Django_Checkbook
+<h5>Nice or Mean game</h5>
 
-Phonebook: 
+This project functions as a game. 
 
-This project functions as a phone book for a user. 
-
-Check Files GUI
+<h5>Check Files GUI </h5>
 
 This project allows the user to choose transfer all .txt files from another chosen directory. 
 
 
-Django_Checkbook:
+<h5>Django_Checkbook:</h5>
 A working checkbook to register transactions from an account
 
 
